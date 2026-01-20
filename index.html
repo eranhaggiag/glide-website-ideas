@@ -1582,23 +1582,75 @@
         }
 
         .tee-inner {
-            width: 180px;
-            height: 180px;
-            background: linear-gradient(135deg, rgba(124, 92, 255, 0.1) 0%, rgba(5, 193, 104, 0.1) 100%);
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(124, 92, 255, 0.05) 0%, rgba(5, 193, 104, 0.05) 100%);
             border: 1px dashed rgba(124, 92, 255, 0.4);
             border-radius: 16px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            padding: 12px;
+        }
+
+        .tee-split {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: 8px;
+        }
+
+        .identity-zone,
+        .agent-zone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .identity-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--glide-green) 0%, var(--glide-teal) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--glide-green-glow);
+        }
+
+        .identity-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .tee-barrier {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+        }
+
+        .tee-barrier svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--glide-green);
+            opacity: 0.8;
+            animation: barrierPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes barrierPulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
         }
 
         .agent-icon {
-            width: 64px;
-            height: 64px;
+            width: 48px;
+            height: 48px;
             background: linear-gradient(135deg, var(--glide-purple) 0%, var(--glide-cyan) 100%);
-            border-radius: 16px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1606,19 +1658,28 @@
         }
 
         @keyframes agentPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(124, 92, 255, 0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(124, 92, 255, 0.5); }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(124, 92, 255, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 0 25px rgba(124, 92, 255, 0.5); }
         }
 
         .agent-icon svg {
-            width: 32px;
-            height: 32px;
+            width: 24px;
+            height: 24px;
             fill: white;
         }
 
-        .agent-label {
-            font-size: 0.8rem;
+        .zone-label {
+            font-size: 0.65rem;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .identity-zone .zone-label {
+            color: var(--glide-green);
+        }
+
+        .agent-zone .zone-label {
             color: var(--glide-purple);
         }
 
@@ -2802,10 +2863,23 @@
                                 </div>
                             </div>
                             <div class="tee-inner">
-                                <div class="agent-icon">
-                                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                                <div class="tee-split">
+                                    <div class="identity-zone">
+                                        <div class="identity-icon">
+                                            <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                                        </div>
+                                        <span class="zone-label">User Identity</span>
+                                    </div>
+                                    <div class="tee-barrier">
+                                        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+                                    </div>
+                                    <div class="agent-zone">
+                                        <div class="agent-icon">
+                                            <svg viewBox="0 0 24 24"><path d="M21 10.12h-6.78l2.74-2.82c-2.73-2.7-7.15-2.8-9.88-.1-2.73 2.71-2.73 7.08 0 9.79s7.15 2.71 9.88 0C18.32 15.65 19 14.08 19 12.1h2c0 1.98-.88 4.55-2.64 6.29-3.51 3.48-9.21 3.48-12.72 0-3.5-3.47-3.53-9.11-.02-12.58s9.14-3.47 12.65 0L21 3v7.12z"/></svg>
+                                        </div>
+                                        <span class="zone-label">AI Agent</span>
+                                    </div>
                                 </div>
-                                <span class="agent-label">AI Agent</span>
                             </div>
                         </div>
                     </div>
